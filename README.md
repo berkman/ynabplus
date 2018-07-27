@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+redirect_uri must be using ssl so you'll need to generate a self-signed cert and configure puma to use it.
 
-Things you may want to cover:
+# openssl req -x509 -sha256 -nodes -newkey rsa:2048 -days 365 -keyout localhost.key -out localhost.crt
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# rails s -b 'ssl://localhost:3000?key=./localhost.key&cert=./localhost.crt'
