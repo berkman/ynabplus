@@ -8,6 +8,8 @@ class PayeesController < ApplicationController
 
     budget_id = ENV['YNAB_BUDGET_ID']
 
+    #curl -H "Authorization: Bearer <ACCESS_TOKEN>" https://api.youneedabudget.com/v1/budgets
+
     payee_response = ynab_api.payees.get_payees(budget_id)
     @payees = payee_response.data.payees
   end

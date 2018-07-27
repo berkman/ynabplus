@@ -31,3 +31,6 @@
 
 
 .env
+*.key
+*.crt
+*.sh

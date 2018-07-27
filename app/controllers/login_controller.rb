@@ -1,6 +1,6 @@
-require 'omniauth-oauth'
 require 'net/http'
 require 'uri'
+require 'json'
 
 class LoginController < ApplicationController
   def main
@@ -8,7 +8,7 @@ class LoginController < ApplicationController
     @ynab_id = ENV['YNAB_ID']
     @ynab_secret = ENV['YNAB_SECRET']
     @ynab_redirect = ENV['YNAB_REDIRECT']
-    @ynab_token = params[:access_token]
+    # TODO: state for CSRF
 
     @param = {'client_id' => @ynab_id,
       "client_secret" => @ynab_secret,
@@ -25,9 +25,11 @@ class LoginController < ApplicationController
     request = Net::HTTP::Post.new(uri.request_uri)
     request.set_form_data(@param)
     response = http.request(request)
-    puts response.body
-  end
 
-  def callback
+    data = JSON.parse(response.body)
+
+    puts data
+
+    @ynab_token = data["access_token"] || nil
   end
 end
