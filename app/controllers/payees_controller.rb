@@ -6,7 +6,7 @@ class PayeesController < ApplicationController
 
     ynab_api = YNAB::API.new(access_token)
 
-    budget_id = ENV['YNAB_BUDGET_IT']
+    budget_id = ENV['YNAB_BUDGET_ID']
 
     payee_response = ynab_api.payees.get_payees(budget_id)
     @payees = payee_response.data.payees
