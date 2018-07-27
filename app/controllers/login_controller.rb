@@ -1,6 +1,7 @@
 require 'net/http'
 require 'uri'
 require 'json'
+require 'ynab'
 
 class LoginController < ApplicationController
   def main
@@ -31,5 +32,21 @@ class LoginController < ApplicationController
     puts data
 
     @ynab_token = data["access_token"] || nil
+
+    #@user = User.new()
+    #@user.access_token = data["access_token"]
+    #@user.save
+
+    # TODO: need to save better and associate to a specific user so we can query against that user
+
+    #The access token has an expiration, indicated by the "expires_in" value. To obtain a new access token without requiring the user to manually authorize again, you should store the "refresh_token" and then send a POST request to https://app.youneedabudget.com/oauth/token?client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]&grant_type=refresh_token&refresh_token=[REFRESH_TOKEN].
+
+    #budget_id = ENV['YNAB_BUDGET_ID']
+
+
+    #ynab_api = YNAB::API.new(@ynab_token)
+
+    #payee_response = ynab_api.payees.get_payees(budget_id)
+    #@payees = payee_response.data.payees
   end
 end
