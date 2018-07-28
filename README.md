@@ -1,5 +1,7 @@
 # README
 
+[![Build Status](https://travis-ci.org/berkman/ynabplus.svg?branch=master)](https://travis-ci.org/berkman/ynabplus)
+
 redirect_uri must be using ssl so you'll need to generate a self-signed cert and configure puma to use it.
 
 # openssl req -x509 -sha256 -nodes -newkey rsa:2048 -days 365 -keyout localhost.key -out localhost.crt
