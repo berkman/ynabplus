@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'months', to: 'months#main'
   get 'accounts', to: 'accounts#main'
   get 'categories', to: 'categories#main'
   get 'budgets', to: 'budgets#main'

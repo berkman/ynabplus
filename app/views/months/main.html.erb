@@ -1,0 +1,5 @@
+<a href="/">Home</a>
+<h1>Months</h1>
+<% @months.sort { |a,b| a.month <=> b.month }.each do |month| %>
+  <p><%= month.month %>, <%= month.to_be_budgeted %>
+<% end %>
