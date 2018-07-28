@@ -11,42 +11,36 @@ class LoginController < ApplicationController
     @ynab_redirect = ENV['YNAB_REDIRECT']
     # TODO: state for CSRF
 
-    @param = {'client_id' => @ynab_id,
-      "client_secret" => @ynab_secret,
-      "redirect_uri" => @ynab_redirect,
-      "grant_type" => "authorization_code",
-      "code" => @ynab_code
-    }
+    if @ynab_code
+      @param = {'client_id' => @ynab_id,
+        "client_secret" => @ynab_secret,
+        "redirect_uri" => @ynab_redirect,
+        "grant_type" => "authorization_code",
+        "code" => @ynab_code
+      }
 
-    puts @param
+      puts @param
 
-    uri = URI.parse('https://app.youneedabudget.com/oauth/token')
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    request = Net::HTTP::Post.new(uri.request_uri)
-    request.set_form_data(@param)
-    response = http.request(request)
+      uri = URI.parse('https://app.youneedabudget.com/oauth/token')
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      request = Net::HTTP::Post.new(uri.request_uri)
+      request.set_form_data(@param)
+      response = http.request(request)
 
-    data = JSON.parse(response.body)
+      data = JSON.parse(response.body)
 
-    puts data
+      puts data
 
-    @ynab_token = data["access_token"] || nil
-
-    #@user = User.new()
-    #@user.access_token = data["access_token"]
-    #@user.save
-
-    # TODO: need to save better and associate to a specific user so we can query against that user
-
-    #The access token has an expiration, indicated by the "expires_in" value. To obtain a new access token without requiring the user to manually authorize again, you should store the "refresh_token" and then send a POST request to https://app.youneedabudget.com/oauth/token?client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]&grant_type=refresh_token&refresh_token=[REFRESH_TOKEN].
-
-    #budget_id = ENV['YNAB_BUDGET_ID']
-
-
-    #ynab_api = YNAB::API.new(@ynab_token)
-
-    #payee_response = ynab_api.payees.get_payees(budget_id)
-    #@payees = payee_response.data.payees
+      if data["access_token"]
+        @ynab_token = data["access_token"]
+        session[:access_token] = @ynab_token
+        #@user = User.new('name' => 'mike')
+        #@user.access_token = data["access_token"]
+        #@user.save
+        # TODO: need to save better and associate to a specific user so we can query against that user
+        #The access token has an expiration, indicated by the "expires_in" value. To obtain a new access token without requiring the user to manually authorize again, you should store the "refresh_token" and then send a POST request to https://app.youneedabudget.com/oauth/token?client_id=[CLIENT_ID]&client_secret=[CLIENT_SECRET]&grant_type=refresh_token&refresh_token=[REFRESH_TOKEN].
+      end
+    end
   end
 end
