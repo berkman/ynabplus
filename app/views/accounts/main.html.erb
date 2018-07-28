@@ -1,0 +1,5 @@
+<a href="/">Home</a>
+<h1>Accounts</h1>
+<% @accounts.sort { |a,b| a.name <=> b.name }.each do |account| %>
+  <p><%= account.name %>, <%= account.id %>, <%= account.balance %></p>
+<% end %>

@@ -1,7 +1,9 @@
 <% if session[:access_token] %>
+<p><a href="/budgets">Budgets</a></p>
 <p><a href="/payees">Payees</a></p>
-<% else %>
+<p><a href="/categories">Categories</a></p>
+<p><a href="/accounts">Accounts</a></p>
+<% end %>
 <h1>Login</h1>
 <p><a href="https://app.youneedabudget.com/oauth/authorize?client_id=<%= @ynab_id %>&redirect_uri=<%= @ynab_redirect %>&response_type=code
 "><%= image_tag "ynab-api.png" %></a></p>
-<% end %>
