@@ -11,7 +11,9 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
 
 
     assistant_response = Hash.new
-    assistant_response[:responseId] = assistant_request[:responseId]
+    assistant_response[:fulfillmentText] = "This is the response!!!!!!"
+
+    #assistant_response[:responseId] = assistant_request[:responseId]
     #assistant_response[:queryResult] ||= {}
     #assistant_response[:queryResult][:queryText] = assistant_request[:queryResult][:queryText]
     #assistant_response[:queryResult][:action] = assistant_request[:queryResult][:action]
