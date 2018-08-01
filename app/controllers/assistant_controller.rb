@@ -17,22 +17,30 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
     assistant_response[:queryResult][:parameters] = assistant_request[:queryResult][:parameters]
     assistant_response[:queryResult][:allRequiredParamsPresent] = assistant_request[:queryResult][:allRequiredParamsPresent]
 
+    # json array
     assistant_response[:queryResult][:fulfillmentMessages] ||= {}
+
+    # json array
     assistant_response[:queryResult][:fulfillmentMessages][:text] ||= {}
     assistant_response[:queryResult][:fulfillmentMessages][:text][:text] = "Your category is category!  You have undefined remaining."
 
     assistant_response[:queryResult][:fulfillmentMessages][:card] ||= {}
     assistant_response[:queryResult][:fulfillmentMessages][:card][:title] = "Card Title"
-    assistant_response[:queryResult][:fulfillmentMessages][:card][:subtitle] = "This is the body text of a card.  You can even use line\n  breaks and emoji! 💁"
+    assistant_response[:queryResult][:fulfillmentMessages][:card][:subtitle] = "This is the body text of a card."
     assistant_response[:queryResult][:fulfillmentMessages][:card][:imageUri] = "https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png"
+
+    # json array
     assistant_response[:queryResult][:fulfillmentMessages][:card][:buttons] ||= {}
     assistant_response[:queryResult][:fulfillmentMessages][:card][:buttons][:text] = "This is a button"
     assistant_response[:queryResult][:fulfillmentMessages][:card][:buttons][:postback] = "https://assistant.google.com/"
 
+    # json array
     assistant_response[:queryResult][:fulfillmentMessages][:quickReplies] ||= {}
     assistant_response[:queryResult][:fulfillmentMessages][:quickReplies][:quickReplies] = "derp", "Suggestion"
 
+    # json array
     assistant_response[:queryResult][:outputContexts] ||= {}
+
     assistant_response[:queryResult][:intent] ||= {}
     assistant_response[:queryResult][:intentDetectionConfidence] = assistant_request[:queryResult][:intentDetectionConfidence]
     assistant_response[:queryResult][:diagnosticInfo] ||= {}
