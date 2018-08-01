@@ -21,7 +21,7 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
     #assistant_response[:queryResult][:allRequiredParamsPresent] = assistant_request[:queryResult][:allRequiredParamsPresent]
 
     # json array
-    #assistant_response[:queryResult][:fulfillmentMessages] ||= {}
+    assistant_response[:fulfillmentMessages] ||= {}
 
     # json array
     #assistant_response[:queryResult][:fulfillmentMessages][:text] ||= {}
