@@ -1,57 +1,46 @@
+require 'ynab'
+
 class AssistantController < ApplicationController
 skip_before_action :verify_authenticity_token
 http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASSISTANT_PASSWORD']
 
   def main
+    access_token = ENV['YNAB_ACCESS']
+    budget_id = ENV['YNAB_BUDGET_ID']
+
+    ynab_api = YNAB::API.new(access_token)
+
+    category_groups_response = ynab_api.categories.get_categories(budget_id)
+    @category_groups = category_groups_response.data.category_groups
+
+
     assistant_request = Hash.new
     assistant_request[:responseId] = params[:responseId] || nil
     assistant_request[:queryResult] = params[:queryResult] || nil
     assistant_request[:originalDetectIntentRequest] = params[:originalDetectIntentRequest] || nil
     assistant_request[:session] = params[:session] || nil
 
-
     assistant_response = Hash.new
-    assistant_response[:fulfillmentText] = "This is the response!!!!!!"
 
-    assistant_response[:fulfillmentMessages] ||= []
-    assistant_response[:fulfillmentMessages][0] ||= {}
+    @category_groups.sort { |a,b| a.name <=> b.name }.each do |category_group|
+      category_group.categories.each do |category|
+        #puts category.name
+        if category.name == assistant_request[:queryResult][:queryText]
+          assistant_response[:fulfillmentText] = category.name + " " + (category.budgeted/1000).to_s + " " + (category.balance/1000).to_s
+        end
+      end
+    end
 
-    assistant_response[:fulfillmentMessages][0][:card] ||= {}
-    assistant_response[:fulfillmentMessages][0][:card][:title] = "Card Title"
-    assistant_response[:fulfillmentMessages][0][:card][:subtitle] = "This is the body text of a card."
-    assistant_response[:fulfillmentMessages][0][:card][:imageUri] = "https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png"
-
-    assistant_response[:fulfillmentMessages][0][:card][:buttons] ||= []
-    assistant_response[:fulfillmentMessages][0][:card][:buttons][0] ||= {}
-    assistant_response[:fulfillmentMessages][0][:card][:buttons][0][:text] = "This is a button"
-    assistant_response[:fulfillmentMessages][0][:card][:buttons][0][:postback] = "https://assistant.google.com/"
-
-
-
-
-
-
-    #assistant_response[:responseId] = assistant_request[:responseId]
-    #assistant_response[:queryResult] ||= {}
-    #assistant_response[:queryResult][:queryText] = assistant_request[:queryResult][:queryText]
-    #assistant_response[:queryResult][:action] = assistant_request[:queryResult][:action]
-    #assistant_response[:queryResult][:parameters] = assistant_request[:queryResult][:parameters]
-    #assistant_response[:queryResult][:allRequiredParamsPresent] = assistant_request[:queryResult][:allRequiredParamsPresent]
-
-
-    # json array
-    #assistant_response[:queryResult][:fulfillmentMessages][:quickReplies] ||= {}
-    #assistant_response[:queryResult][:fulfillmentMessages][:quickReplies][:quickReplies] = "derp", "Suggestion"
-
-    # json array
-    #assistant_response[:queryResult][:outputContexts] ||= {}
-
-    #assistant_response[:queryResult][:intent] ||= {}
-    #assistant_response[:queryResult][:intentDetectionConfidence] = assistant_request[:queryResult][:intentDetectionConfidence]
-    #assistant_response[:queryResult][:diagnosticInfo] ||= {}
-    #assistant_response[:queryResult][:languageCode] = assistant_request[:queryResult][:languageCode]
-    #assistant_response[:webhookStatus] ||= {}
-    #assistant_response[:webhookStatus][:message] = "Webhook execution successful"
+    #assistant_response[:fulfillmentMessages] ||= []
+    #assistant_response[:fulfillmentMessages][0] ||= {}
+    #assistant_response[:fulfillmentMessages][0][:card] ||= {}
+    #assistant_response[:fulfillmentMessages][0][:card][:title] = "Card Title"
+    #assistant_response[:fulfillmentMessages][0][:card][:subtitle] = "This is the body text of a card."
+    #assistant_response[:fulfillmentMessages][0][:card][:imageUri] = "https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png"
+    #assistant_response[:fulfillmentMessages][0][:card][:buttons] ||= []
+    #assistant_response[:fulfillmentMessages][0][:card][:buttons][0] ||= {}
+    #assistant_response[:fulfillmentMessages][0][:card][:buttons][0][:text] = "This is a button"
+    #assistant_response[:fulfillmentMessages][0][:card][:buttons][0][:postback] = "https://assistant.google.com/"
 
     respond_to do |format|
       format.html # index.html.erb
