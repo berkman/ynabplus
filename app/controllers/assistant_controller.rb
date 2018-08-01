@@ -24,9 +24,11 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
 
     @category_groups.sort { |a,b| a.name <=> b.name }.each do |category_group|
       category_group.categories.each do |category|
-        #puts category.name
-        if category.name == assistant_request[:queryResult][:queryText]
-          assistant_response[:fulfillmentText] = category.name + " " + (category.budgeted/1000).to_s + " " + (category.balance/1000).to_s
+
+        if assistant_request[:queryResult][:parameters][:category].include? category.name
+          #assistant_response[:fulfillmentText] = category.name + " " + (category.budgeted/1000).to_s + " " + (category.balance/1000).to_s
+          assistant_response[:fulfillmentText] = (category.balance/1000).to_s
+          puts "xxxxxxxxxxxxxxxxxxxx BURPEEEEE"
         end
       end
     end
