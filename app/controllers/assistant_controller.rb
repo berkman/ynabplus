@@ -21,21 +21,18 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
     #assistant_response[:queryResult][:allRequiredParamsPresent] = assistant_request[:queryResult][:allRequiredParamsPresent]
 
     # json array
-    assistant_response[:fulfillmentMessages] ||= {}
+    assistant_response[:fulfillmentMessages] ||= []
+    assistant_response[:fulfillmentMessages][0] ||= {}
+
+    assistant_response[:fulfillmentMessages][0][:card] ||= {}
+    assistant_response[:fulfillmentMessages][0][:card][:title] = "Card Title"
+    assistant_response[:fulfillmentMessages][0][:card][:subtitle] = "This is the body text of a card."
+    assistant_response[:fulfillmentMessages][0][:card][:imageUri] = "https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png"
 
     # json array
-    #assistant_response[:queryResult][:fulfillmentMessages][:text] ||= {}
-    #assistant_response[:queryResult][:fulfillmentMessages][:text][:text] = "Your category is category!  You have undefined remaining."
-
-    assistant_response[:fulfillmentMessages][:card] ||= {}
-    assistant_response[:fulfillmentMessages][:card][:title] = "Card Title"
-    assistant_response[:fulfillmentMessages][:card][:subtitle] = "This is the body text of a card."
-    assistant_response[:fulfillmentMessages][:card][:imageUri] = "https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png"
-
-    # json array
-    assistant_response[:fulfillmentMessages][:card][:buttons] ||= {}
-    assistant_response[:fulfillmentMessages][:card][:buttons][:text] = "This is a button"
-    assistant_response[:fulfillmentMessages][:card][:buttons][:postback] = "https://assistant.google.com/"
+    #assistant_response[:fulfillmentMessages][:card][:buttons] ||= {}
+    #assistant_response[:fulfillmentMessages][:card][:buttons][:text] = "This is a button"
+    #assistant_response[:fulfillmentMessages][:card][:buttons][:postback] = "https://assistant.google.com/"
 
     # json array
     #assistant_response[:queryResult][:fulfillmentMessages][:quickReplies] ||= {}
