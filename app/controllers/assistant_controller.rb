@@ -13,14 +13,6 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
     assistant_response = Hash.new
     assistant_response[:fulfillmentText] = "This is the response!!!!!!"
 
-    #assistant_response[:responseId] = assistant_request[:responseId]
-    #assistant_response[:queryResult] ||= {}
-    #assistant_response[:queryResult][:queryText] = assistant_request[:queryResult][:queryText]
-    #assistant_response[:queryResult][:action] = assistant_request[:queryResult][:action]
-    #assistant_response[:queryResult][:parameters] = assistant_request[:queryResult][:parameters]
-    #assistant_response[:queryResult][:allRequiredParamsPresent] = assistant_request[:queryResult][:allRequiredParamsPresent]
-
-    # json array
     assistant_response[:fulfillmentMessages] ||= []
     assistant_response[:fulfillmentMessages][0] ||= {}
 
@@ -29,10 +21,23 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
     assistant_response[:fulfillmentMessages][0][:card][:subtitle] = "This is the body text of a card."
     assistant_response[:fulfillmentMessages][0][:card][:imageUri] = "https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png"
 
-    # json array
-    #assistant_response[:fulfillmentMessages][:card][:buttons] ||= {}
-    #assistant_response[:fulfillmentMessages][:card][:buttons][:text] = "This is a button"
-    #assistant_response[:fulfillmentMessages][:card][:buttons][:postback] = "https://assistant.google.com/"
+    assistant_response[:fulfillmentMessages][0][:card][:buttons] ||= []
+    assistant_response[:fulfillmentMessages][0][:card][:buttons][0] ||= {}
+    assistant_response[:fulfillmentMessages][0][:card][:buttons][0][:text] = "This is a button"
+    assistant_response[:fulfillmentMessages][0][:card][:buttons][0][:postback] = "https://assistant.google.com/"
+
+
+
+
+
+
+    #assistant_response[:responseId] = assistant_request[:responseId]
+    #assistant_response[:queryResult] ||= {}
+    #assistant_response[:queryResult][:queryText] = assistant_request[:queryResult][:queryText]
+    #assistant_response[:queryResult][:action] = assistant_request[:queryResult][:action]
+    #assistant_response[:queryResult][:parameters] = assistant_request[:queryResult][:parameters]
+    #assistant_response[:queryResult][:allRequiredParamsPresent] = assistant_request[:queryResult][:allRequiredParamsPresent]
+
 
     # json array
     #assistant_response[:queryResult][:fulfillmentMessages][:quickReplies] ||= {}
