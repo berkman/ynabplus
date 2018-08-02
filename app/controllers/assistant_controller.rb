@@ -8,6 +8,8 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
     access_token = ENV['YNAB_ACCESS']
     budget_id = ENV['YNAB_BUDGET_ID']
 
+    # todo - let the user log in to your app (via google login?) and select what categories that want to be available
+
     ynab_api = YNAB::API.new(access_token)
 
     category_groups_response = ynab_api.categories.get_categories(budget_id)
@@ -29,7 +31,7 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
       #assistant_response[:payload][:google][:richResponse][:suggestions] ||= []
       #assistant_response[:payload][:google][:richResponse][:suggestions] << {:title => 'balance'}
       #assistant_response[:payload][:google][:richResponse][:suggestions] << {:title => 'budget'}
-    elsif assistant_request[:queryResult][:intent][:displayName] == "Category Intent"
+    elsif assistant_request[:queryResult][:intent][:displayName] == "Balance Intent"
       @category_groups.sort { |a,b| a.name <=> b.name }.each do |category_group|
         category_group.categories.each do |category|
 
