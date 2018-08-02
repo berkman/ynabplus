@@ -26,9 +26,9 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
 
     if assistant_request[:queryResult][:intent][:displayName] == "Default Welcome Intent"
       assistant_response[:fulfillmentText] = "Greetings! How can I assist?"
-      assistant_response[:payload][:google][:richResponse][:suggestions] ||= []
-      assistant_response[:payload][:google][:richResponse][:suggestions] << {:title => 'balance'}
-      assistant_response[:payload][:google][:richResponse][:suggestions] << {:title => 'budget'}
+      #assistant_response[:payload][:google][:richResponse][:suggestions] ||= []
+      #assistant_response[:payload][:google][:richResponse][:suggestions] << {:title => 'balance'}
+      #assistant_response[:payload][:google][:richResponse][:suggestions] << {:title => 'budget'}
     elsif assistant_request[:queryResult][:intent][:displayName] == "Category Intent"
       @category_groups.sort { |a,b| a.name <=> b.name }.each do |category_group|
         category_group.categories.each do |category|
