@@ -20,9 +20,9 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
     assistant_request[:session] = params[:session] || nil
 
     assistant_response = Hash.new
-    assistant_response[:payload] ||= {}
-    assistant_response[:payload][:google] ||= {}
-    assistant_response[:payload][:google][:richResponse] ||= {}
+    #assistant_response[:payload] ||= {}
+    #assistant_response[:payload][:google] ||= {}
+    #assistant_response[:payload][:google][:richResponse] ||= {}
 
     if assistant_request[:queryResult][:intent][:displayName] == "Default Welcome Intent"
       assistant_response[:fulfillmentText] = "Greetings! How can I assist?"
