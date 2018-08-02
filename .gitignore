@@ -33,6 +33,5 @@
 .env
 *.key
 *.crt
-*.sh
 *.DS_Store
 examples/*
