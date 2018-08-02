@@ -35,3 +35,4 @@
 *.crt
 *.sh
 *.DS_Store
+examples/*

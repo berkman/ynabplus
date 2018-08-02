@@ -13,7 +13,6 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
     category_groups_response = ynab_api.categories.get_categories(budget_id)
     @category_groups = category_groups_response.data.category_groups
 
-
     assistant_request = Hash.new
     assistant_request[:responseId] = params[:responseId] || nil
     assistant_request[:queryResult] = params[:queryResult] || nil
@@ -21,14 +20,22 @@ http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASS
     assistant_request[:session] = params[:session] || nil
 
     assistant_response = Hash.new
+    assistant_response[:payload] ||= {}
+    assistant_response[:payload][:google] ||= {}
+    assistant_response[:payload][:google][:richResponse] ||= {}
 
-    @category_groups.sort { |a,b| a.name <=> b.name }.each do |category_group|
-      category_group.categories.each do |category|
+    if assistant_request[:queryResult][:intent][:displayName] == "Default Welcome Intent"
+      assistant_response[:fulfillmentText] = "Greetings! How can I assist?"
+      assistant_response[:payload][:google][:richResponse][:suggestions] ||= []
+      assistant_response[:payload][:google][:richResponse][:suggestions] << {:title => 'balance'}
+      assistant_response[:payload][:google][:richResponse][:suggestions] << {:title => 'budget'}
+    elsif assistant_request[:queryResult][:intent][:displayName] == "Category Intent"
+      @category_groups.sort { |a,b| a.name <=> b.name }.each do |category_group|
+        category_group.categories.each do |category|
 
-        if assistant_request[:queryResult][:parameters][:category].include? category.name
-          #assistant_response[:fulfillmentText] = category.name + " " + (category.budgeted/1000).to_s + " " + (category.balance/1000).to_s
-          assistant_response[:fulfillmentText] = (category.balance/1000).to_s
-          puts "xxxxxxxxxxxxxxxxxxxx BURPEEEEE"
+          if assistant_request[:queryResult][:parameters][:category].include? category.name
+            assistant_response[:fulfillmentText] = "$"+(category.balance/1000).to_s
+          end
         end
       end
     end
