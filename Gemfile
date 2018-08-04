@@ -32,9 +32,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'ynab'
 gem 'omniauth-google-oauth2'
-gem 'omniauth-oauth'
+gem 'omniauth-oauth2'
 gem 'omniauth'
-gem 'omniauth-ynab-oauth'#, github: 'berkman/omniauth-ynab-oauth', branch: 'master'
+gem 'omniauth-ynab'#, github: 'berkman/omniauth-ynab', branch: 'master'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

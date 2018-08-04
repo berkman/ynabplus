@@ -114,7 +114,6 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
-    oauth (0.5.4)
     oauth2 (1.4.0)
       faraday (>= 0.8, < 0.13)
       jwt (~> 1.0)
@@ -128,16 +127,12 @@ GEM
       jwt (>= 1.5)
       omniauth (>= 1.1.1)
       omniauth-oauth2 (>= 1.5)
-    omniauth-oauth (1.1.0)
-      oauth
-      omniauth (~> 1.0)
     omniauth-oauth2 (1.5.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
-    omniauth-ynab-oauth (0.0.11)
-      oauth
-      omniauth (~> 1.0)
-      omniauth-oauth (~> 1.1.0)
+    omniauth-ynab (0.0.3)
+      oauth2 (~> 1.1)
+      omniauth (~> 1.2)
     pg (1.0.0)
     public_suffix (3.0.2)
     puma (3.12.0)
@@ -239,8 +234,8 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   omniauth
   omniauth-google-oauth2
-  omniauth-oauth
-  omniauth-ynab-oauth
+  omniauth-oauth2
+  omniauth-ynab
   pg
   puma (~> 3.11)
   rails (~> 5.2.0)

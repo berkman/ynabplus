@@ -5,7 +5,7 @@ skip_before_action :verify_authenticity_token
 http_basic_authenticate_with name: ENV['ASSISTANT_USERNAME'], password: ENV['ASSISTANT_PASSWORD']
 
   def main
-    access_token = ENV['YNAB_ACCESS']
+    access_token = current_user.oauth_token
     budget_id = ENV['YNAB_BUDGET_ID']
 
     # todo - let the user log in to your app (via google login?) and select what categories that want to be available
