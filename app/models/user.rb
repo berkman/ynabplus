@@ -10,3 +10,7 @@ class User < ActiveRecord::Base
     end
   end
 end
+
+
+# User vs identify (ynab, google, twitter, etc) models.  make a default budget part of
+# the ynab identity model.  can we cache all of the other ynab data?
