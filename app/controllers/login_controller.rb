@@ -6,8 +6,8 @@ require 'ynab'
 class LoginController < ApplicationController
   def main
     @ynab_code = params[:code]
-    @ynab_id = ENV['YNAB_ID']
-    @ynab_secret = ENV['YNAB_SECRET']
+    @ynab_id = ENV['YNAB_CLIENT_ID']
+    @ynab_secret = ENV['YNAB_CLIENT_SECRET']
     @ynab_redirect = ENV['YNAB_REDIRECT']
     # TODO: state for CSRF
 

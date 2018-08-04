@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
+
   post 'assistant', to: 'assistant#main'
 
   get 'months', to: 'months#main'
