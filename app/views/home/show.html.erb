@@ -1,7 +1,7 @@
     <div>
-      <% if current_user %>
-        Signed in to <strong>YNAB</strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out_ynab" %>
+      <% if @google_current_user %>
+        Signed in to <strong>Google</strong>!
+        <%= link_to "Sign out", signout_path, id: "sign_out_google" %>
         <div>
           <p><a href="/accounts">Accounts</a></p>
           <p><a href="/budgets">Budgets</a></p>
@@ -10,6 +10,6 @@
           <p><a href="/payees">Payees</a></p>
         </div>
       <% else %>
-        <%= link_to "Sign in with YNAB", "/auth/ynab", id: "sign_in_ynab" %>
+        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in_google" %>
       <% end %>
     </div>

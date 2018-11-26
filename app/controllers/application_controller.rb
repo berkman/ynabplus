@@ -1,19 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user, :signed_in? # here?
+  helper_method :current_user, :signed_in?
 
   protected
 
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  def current_google_user
+    @current_google_user ||= User.find(session[:google_user_id]) if session[:google_user_id]
   end
 
-  def signed_in?
-    !!current_user
+  def google_signed_in?
+    !!current_google_user
   end
 
-  def current_user=(user)
-    session[:user_id] = user&.id
-    @current_user = user
-  end
+  #def current_user=(user)
+  #  session[:user_id] = user&.id
+  #  @current_user = user
+  #end
 end
