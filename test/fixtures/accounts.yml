@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account_id: 
+  name: 
+  type: 
+  on_budget: 
+  closed: 
+  note: 
+  balance: 
+  cleared_balance: 
+  uncleared_balance: 
+  transfer_payee_id: 
+  deleted: 
+  budget_id: 1
+
+two:
+  account_id: 
+  name: 
+  type: 
+  on_budget: 
+  closed: 
+  note: 
+  balance: 
+  cleared_balance: 
+  uncleared_balance: 
+  transfer_payee_id: 
+  deleted: 
+  budget_id: 1

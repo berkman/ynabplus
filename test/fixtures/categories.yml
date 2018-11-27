@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category_id: 
+  category_group_id: 
+  name: 
+  hidden: 
+  original_category_group_id: 
+  note: 
+  budgeted: 
+  activity: 
+  balance: 
+  goal_type: 
+  deleted: 
+  budget_id: 1
+
+two:
+  category_id: 
+  category_group_id: 
+  name: 
+  hidden: 
+  original_category_group_id: 
+  note: 
+  budgeted: 
+  activity: 
+  balance: 
+  goal_type: 
+  deleted: 
+  budget_id: 1

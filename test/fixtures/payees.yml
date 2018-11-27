@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  payee_id: 
+  name: 
+  transfer_account_id: 
+  deleted: 
+  budget_id: 1
+
+two:
+  payee_id: 
+  name: 
+  transfer_account_id: 
+  deleted: 
+  budget_id: 1
