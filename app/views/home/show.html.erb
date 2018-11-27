@@ -3,6 +3,7 @@
         Signed in to <strong>YNAB</strong>!
         <%= link_to "Sign out", signout_path, id: "sign_out_ynab" %>
         <div>
+          <p><%= current_user.uid %></p>
           <p><a href="/accounts">Accounts</a></p>
           <p><a href="/budgets">Budgets</a></p>
           <p><a href="/categories">Categories</a></p>
