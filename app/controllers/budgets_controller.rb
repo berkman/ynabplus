@@ -6,5 +6,9 @@ class BudgetsController < ApplicationController
 
     budgets_response = ynab_api.budgets.get_budgets
     @budgets = budgets_response.data.budgets
+
+    @budgets.each do |budget|
+      Budget.from_ynab(budget.id, budget.name, current_user.id)
+    end
   end
 end

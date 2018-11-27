@@ -1,4 +1,5 @@
 <a href="/">Home</a>
+<p><%= @budget.name %></p>
 <h1>Category Groups</h1>
 <% @category_groups.sort { |a,b| a.name <=> b.name }.each do |category_group| %>
   <p><%= category_group.name %>, <%= category_group.id %></p>
