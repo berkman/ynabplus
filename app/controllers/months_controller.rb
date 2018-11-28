@@ -1,7 +1,7 @@
 require 'ynab'
 
 class MonthsController < ApplicationController
-  def main
+  def index
     @budget = current_user.budgets.first
 
     ynab_api = YNAB::API.new(current_user.oauth_token)

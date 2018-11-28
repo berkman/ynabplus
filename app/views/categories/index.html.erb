@@ -1,0 +1,22 @@
+<a href="/">Home</a>
+<p><%= @budget.name %></p>
+<h1>Category Groups</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Budgeted</th>
+    <th>Activity</th>
+    <th>Balance</th>
+  </tr>
+<% @category_groups.sort { |a,b| a.name <=> b.name }.each do |category_group| %>
+  <tr><td colspan="3"><strong><%= category_group.name %></strong></td></tr>
+  <% category_group.categories.each do |category| %>
+    <tr>
+      <td><%= category.name %></td>
+      <td><%= number_to_currency(category.budgeted/1000.to_d) %></td>
+      <td><%= number_to_currency(category.activity/1000.to_d) %></td>
+      <td><%= number_to_currency(category.balance/1000.to_d) %></td>
+    </tr>
+  <% end %>
+<% end %>
+</table>

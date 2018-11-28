@@ -1,0 +1,19 @@
+<a href="/">Home</a>
+<p><%= @budget.name %></p>
+<h1>Accounts</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Account</th>
+    <th>Type</th>
+    <th>Balance</th>
+  </tr>
+<% @accounts.sort { |a,b| a.name <=> b.name }.each do |account| %>
+  <tr>
+    <td><%= account.id %></td>
+    <td><%= account.name %></td>
+    <td><%= account.type %></td>
+    <td><%= account.balance %></td>
+  </tr>
+<% end %>
+</table>
