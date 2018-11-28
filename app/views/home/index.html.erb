@@ -3,11 +3,13 @@
         Signed in to <strong>YNAB</strong>!
         <%= link_to "Sign out", signout_path, id: "sign_out_ynab" %>
         <div>
-          <p><a href="/accounts">Accounts</a></p>
           <p><a href="/budgets">Budgets</a></p>
+          <% if session[:budgets] %>
+          <p><a href="/accounts">Accounts</a></p>
           <p><a href="/categories">Categories</a></p>
           <p><a href="/months">Months</a></p>
           <p><a href="/payees">Payees</a></p>
+          <% end %>
         </div>
       <% else %>
         <%= link_to "Sign in with YNAB", "/auth/ynab", id: "sign_in_ynab" %>
