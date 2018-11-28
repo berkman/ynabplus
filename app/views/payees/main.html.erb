@@ -1,6 +1,0 @@
-<a href="/">Home</a>
-<p><%= @budget.name %></p>
-<h1>Payees</h1>
-<% @payees.sort { |a,b| a.name <=> b.name }.each do |payee| %>
-  <p><%= payee.name %></p>
-<% end %>
