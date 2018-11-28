@@ -6,7 +6,7 @@
     <th>Active</th>
   </tr>
   <%= form_tag() do %>
-  <% @budgets.sort { |a,b| a.name <=> b.name }.each do |budget| %>
+  <% session[:budgets].each do |budget| %>
   <tr>
     <td><%= budget.name %></td>
     <td><%= radio_button_tag :budget, budget.id %>
